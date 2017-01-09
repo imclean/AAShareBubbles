@@ -30,7 +30,9 @@ typedef NS_ENUM(NSUInteger, AAShareBubbleType) {
     AAShareBubbleTypeQQ = 15,
     AAShareBubbleTypeQzone = 16,
     AAShareBubbleTypeSinaWeibo = 17,
-    AAShareBubbleTypeWechat = 18
+    AAShareBubbleTypeWechat = 18,
+    AAShareBubbleTypeLink = 19,
+    AAShareBubbleTypeClose = 20
 };
 
 @interface AAShareBubbles : UIView
@@ -51,11 +53,13 @@ typedef NS_ENUM(NSUInteger, AAShareBubbleType) {
 @property (nonatomic, assign) BOOL showInstagramBubble;
 @property (nonatomic, assign) BOOL showFavoriteBubble;
 @property (nonatomic, assign) BOOL showWhatsappBubble;
+@property (nonatomic, assign) BOOL showLinkBubble;
 @property (nonatomic, assign) BOOL showSinaWeiboBubble;
 @property (nonatomic, assign) BOOL showQQBubble;
 @property (nonatomic, assign) BOOL showQzoneBubble;
 @property (nonatomic, assign) BOOL showWechatBubble;
 @property (nonatomic, assign) BOOL showMessageBubble;
+@property (nonatomic, assign) BOOL showCloseBubble;
 @property (nonatomic, strong) NSMutableArray *customButtons;
 
 // The radius from center point to each share button
@@ -97,6 +101,8 @@ typedef NS_ENUM(NSUInteger, AAShareBubbleType) {
 @property (nonatomic, assign) NSInteger qzoneBackgroundColorRGB;
 @property (nonatomic, assign) NSInteger wechatBackgroundColorRGB;
 @property (nonatomic, assign) NSInteger messageBackgroundColorRGB;
+@property (nonatomic, assign) NSInteger linkBackgroundColorRGB;
+@property (nonatomic, assign) NSInteger closeBackgroundColorRGB;
 
 -(instancetype)initWithPoint:(CGPoint)point radius:(NSInteger)radiusValue inView:(UIView *)inView;
 

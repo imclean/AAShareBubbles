@@ -66,6 +66,8 @@
         self.sinaWeiboBackgroundColorRGB = 0xE6162D;
         self.wechatBackgroundColorRGB = 0x04CE11;
         self.messageBackgroundColorRGB = 0x55D56A;
+        self.linkBackgroundColorRGB = 0x55D56A;
+        self.closeBackgroundColorRGB = 0x202020;
         
         self.customButtons = [[NSMutableArray alloc] init];
         
@@ -143,11 +145,13 @@
         if(self.showQzoneBubble)        [self createButtonWithIcon:@"icon-aa-qzone" backgroundColor:self.qzoneBackgroundColorRGB andType:AAShareBubbleTypeQzone];
         if(self.showSinaWeiboBubble)    [self createButtonWithIcon:@"icon-aa-sinaweibo" backgroundColor:self.sinaWeiboBackgroundColorRGB andType:AAShareBubbleTypeSinaWeibo];
         if(self.showWechatBubble)       [self createButtonWithIcon:@"icon-aa-wechat" backgroundColor:self.wechatBackgroundColorRGB andType:AAShareBubbleTypeWechat];
+        if(self.showLinkBubble)         [self createButtonWithIcon:@"icon-aa-link" backgroundColor:self.linkBackgroundColorRGB andType:AAShareBubbleTypeLink];
         
         for (AACustomShareBubble *customBubble in self.customButtons)
         {
             [self createButtonWithIcon:customBubble.icon backgroundColor:customBubble.backgroundColor andButtonId:customBubble.customId];
         }
+        
         
         if(bubbles.count == 0) return;
         
@@ -181,6 +185,57 @@
             float delayTime = (float) (inetratorI * 0.1);
             [self performSelector:@selector(showBubbleWithAnimation:) withObject:@{@"button" : bubble, @"coordinate" : coordinate} afterDelay:delayTime];
             ++inetratorI;
+        }
+        
+        if(self.showCloseBubble) {
+            NSBundle *classBundle = [NSBundle bundleForClass:[self class]];
+            NSBundle *resourcesBundle = [NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/AAShareBubbles.bundle", classBundle.bundlePath]];
+            UIImage *icon = [UIImage imageNamed:@"icon-aa-close" inBundle:resourcesBundle compatibleWithTraitCollection:nil];
+            UIColor *color = [self colorFromRGB:self.closeBackgroundColorRGB];
+            
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            [button addTarget:self action:@selector(hide:) forControlEvents:UIControlEventTouchUpInside];
+            button.frame = CGRectMake(0, 0, 2 * self.bubbleRadius, 2 * self.bubbleRadius);
+            
+            // Circle background
+            UIView *circle = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2 * self.bubbleRadius, 2 * self.bubbleRadius)];
+            circle.backgroundColor = color;
+            circle.layer.cornerRadius = self.bubbleRadius;
+            circle.layer.masksToBounds = YES;
+            circle.opaque = NO;
+            circle.alpha = 0.97;
+            
+            // Circle icon
+            UIImageView *iconView = [[UIImageView alloc] initWithImage:icon];
+            CGRect f = iconView.frame;
+            f.origin.x = (CGFloat) ((circle.frame.size.width - f.size.width) * 0.5);
+            f.origin.y = (CGFloat) ((circle.frame.size.height - f.size.height) * 0.5);
+            iconView.frame = f;
+            [circle addSubview:iconView];
+            
+            [button setBackgroundImage:[self imageWithView:circle] forState:UIControlStateNormal];
+
+            bubbleIndexTypes[@(bubbles.count - 1)] = @(AAShareBubbleTypeClose);
+            
+            button.tag = AAShareBubbleTypeClose;
+            
+            button.transform = CGAffineTransformMakeScale(0.001, 0.001);
+            button.center = CGPointMake(self.radius, self.radius);
+            [bubbles addObject:button];
+            [self addSubview:button];
+            [UIView animateWithDuration:0.2 delay:0.1 * bubbles.count options:UIViewAnimationOptionCurveEaseOut animations:^{
+                button.transform = CGAffineTransformMakeScale(1.2, 1.2);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.1 animations:^{
+                    button.transform = CGAffineTransformMakeScale(0.9, 0.9);
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.05 animations:^{
+                        button.transform = CGAffineTransformIdentity;
+                    } completion:^(BOOL finished) {
+                        
+                    }];
+                }];
+            }];
         }
     }
 }
