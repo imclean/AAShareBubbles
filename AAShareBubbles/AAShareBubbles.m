@@ -446,7 +446,7 @@
             [UIView animateWithDuration:0.15 animations:^{
                 bubble.transform = CGAffineTransformMakeScale(1, 1);
             } completion:^(BOOL finished) {
-                if(bubble.tag == bubbles.count) self.isAnimating = NO;
+                if(bubble.tag == bubbles.count - 2) self.isAnimating = NO;
                 bubble.layer.shadowColor = [UIColor blackColor].CGColor;
                 bubble.layer.shadowOpacity = 0.2;
                 bubble.layer.shadowOffset = CGSizeMake(0, 1);
@@ -465,7 +465,7 @@
             bubble.transform = CGAffineTransformMakeScale(0.001, 0.001);
             bubble.alpha = 0;
         } completion:^(BOOL finished) {
-            if(bubble.tag == bubbles.count) {
+            if(bubble.tag == bubbles.count - 2) {
                 self.isAnimating = NO;
                 self.hidden = YES;
                 
