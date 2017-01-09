@@ -22,8 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    radius = 130;
-    bubbleRadius = 40;
+    radius = 160;
+    bubbleRadius = 38;
     _radiusSlider.value = radius;
     _bubbleRadiusSlider.value = bubbleRadius;
     
@@ -36,27 +36,27 @@
     if(shareBubbles) {
         shareBubbles = nil;
     }
-    shareBubbles = [[AAShareBubbles alloc] initWithPoint:_shareButton.center radius:radius inView:self.view];
+    shareBubbles = [[AAShareBubbles alloc]initWithPoint:self.view.window.center radius:radius inView:self.view withFont:[UIFont boldSystemFontOfSize:12]];
     shareBubbles.delegate = self;
     shareBubbles.bubbleRadius = bubbleRadius;
     shareBubbles.showFacebookBubble = YES;
     shareBubbles.showTwitterBubble = YES;
-    shareBubbles.showGooglePlusBubble = YES;
-    shareBubbles.showTumblrBubble = YES;
-    shareBubbles.showVkBubble = YES;
-    shareBubbles.showLinkedInBubble = YES;
-    shareBubbles.showYoutubeBubble = YES;
-    shareBubbles.showVimeoBubble = YES;
-    shareBubbles.showRedditBubble = YES;
-    shareBubbles.showPinterestBubble = YES;
+    shareBubbles.showGooglePlusBubble = NO;
+    shareBubbles.showTumblrBubble = NO;
+    shareBubbles.showVkBubble = NO;
+    shareBubbles.showLinkedInBubble = NO;
+    shareBubbles.showYoutubeBubble = NO;
+    shareBubbles.showVimeoBubble = NO;
+    shareBubbles.showRedditBubble = NO;
+    shareBubbles.showPinterestBubble = NO;
     shareBubbles.showInstagramBubble = YES;
     shareBubbles.showWhatsappBubble = YES;
+    shareBubbles.showLinkBubble = YES;
+    shareBubbles.showCloseBubble = YES;
+    shareBubbles.showMailBubble = YES;
+    shareBubbles.showMessageBubble = YES;
     
-    [shareBubbles addCustomButtonWithIcon:[UIImage imageNamed:@"custom-vine-icon"]
-                          backgroundColor:[UIColor colorWithRed:0.0 green:164.0/255.0 blue:120.0/255.0 alpha:1.0]
-                              andButtonId:CUSTOM_BUTTON_ID];
-    
-    [shareBubbles show];
+    [shareBubbles showWithLabels];
 }
 
 - (IBAction)radiusValueChanged:(id)sender {
@@ -106,6 +106,7 @@
             NSLog(@"Custom Button With Type %@", @(bubbleType));
             break;
         default:
+            NSLog(@"Button %i",bubbleType);
             break;
     }
 }

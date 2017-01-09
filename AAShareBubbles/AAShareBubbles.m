@@ -310,27 +310,28 @@
         
         bubbles = [[NSMutableArray alloc] init];
         bubbleIndexTypes = [[NSMutableDictionary alloc] init];
-        
-        if(self.showFacebookBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-facebook"] label:@"facebook" andButtonId:AAShareBubbleTypeFacebook];
-        if(self.showTwitterBubble)      [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-twitter"] label:@"twitter" andButtonId:AAShareBubbleTypeTwitter];
-        if(self.showGooglePlusBubble)   [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-googleplus"] label:@"google+" andButtonId:AAShareBubbleTypeGooglePlus];
-        if(self.showTumblrBubble)       [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-tumblr"] label:@"tumblr" andButtonId:AAShareBubbleTypeTumblr];
-        if(self.showMailBubble)         [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-at"] label:@"email" andButtonId:AAShareBubbleTypeMail];
-        if(self.showVkBubble)           [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-vk"] label:@"vk" andButtonId:AAShareBubbleTypeVk];
-        if(self.showLinkedInBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-linkedin"] label:@"linkedIn" andButtonId:AAShareBubbleTypeLinkedIn];
-        if(self.showPinterestBubble)    [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-pinterest"] label:@"pinterest" andButtonId:AAShareBubbleTypePinterest];
-        if(self.showYoutubeBubble)      [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-youtube"] label:@"youTube" andButtonId:AAShareBubbleTypeYoutube];
-        if(self.showVimeoBubble)        [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-vimeo"] label:@"vimeo" andButtonId:AAShareBubbleTypeVimeo];
-        if(self.showRedditBubble)       [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-reddit"] label:@"reddit" andButtonId:AAShareBubbleTypeReddit];
-        if(self.showInstagramBubble)    [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-instagram"] label:@"instagram" andButtonId:AAShareBubbleTypeInstagram];
-        if(self.showFavoriteBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-star"] label:@"favourite" andButtonId:AAShareBubbleTypeFavorite];
-        if(self.showWhatsappBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-whatsapp"] label:@"whatsApp" andButtonId:AAShareBubbleTypeWhatsapp];
-        if(self.showMessageBubble)      [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-message"] label:@"iMessage" andButtonId:AAShareBubbleTypeMessage];
-        if(self.showQQBubble)           [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-qq"] label:@"qq" andButtonId:AAShareBubbleTypeQQ];
-        if(self.showQzoneBubble)        [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-qzone"] label:@"qzone" andButtonId:AAShareBubbleTypeQzone];
-        if(self.showSinaWeiboBubble)    [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-sinaweibo"] label:@"Sina Weibo" andButtonId:AAShareBubbleTypeSinaWeibo];
-        if(self.showWechatBubble)       [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-wechat"] label:@"WeChat" andButtonId:AAShareBubbleTypeWechat];
-        if(self.showLinkBubble)         [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-link"] label:@"copy link" andButtonId:AAShareBubbleTypeLink];
+        NSBundle *classBundle = [NSBundle bundleForClass:[self class]];
+        NSBundle *resourcesBundle = [NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/AAShareBubbles.bundle", classBundle.bundlePath]];
+        if(self.showFacebookBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-facebook" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"facebook" andButtonId:AAShareBubbleTypeFacebook];
+        if(self.showTwitterBubble)      [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-twitter" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"twitter" andButtonId:AAShareBubbleTypeTwitter];
+        if(self.showGooglePlusBubble)   [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-googleplus" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"google+" andButtonId:AAShareBubbleTypeGooglePlus];
+        if(self.showTumblrBubble)       [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-tumblr" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"tumblr" andButtonId:AAShareBubbleTypeTumblr];
+        if(self.showMailBubble)         [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-at" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"email" andButtonId:AAShareBubbleTypeMail];
+        if(self.showVkBubble)           [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-vk" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"vk" andButtonId:AAShareBubbleTypeVk];
+        if(self.showLinkedInBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-linkedin" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"linkedIn" andButtonId:AAShareBubbleTypeLinkedIn];
+        if(self.showPinterestBubble)    [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-pinterest" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"pinterest" andButtonId:AAShareBubbleTypePinterest];
+        if(self.showYoutubeBubble)      [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-youtube" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"youTube" andButtonId:AAShareBubbleTypeYoutube];
+        if(self.showVimeoBubble)        [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-vimeo" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"vimeo" andButtonId:AAShareBubbleTypeVimeo];
+        if(self.showRedditBubble)       [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-reddit" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"reddit" andButtonId:AAShareBubbleTypeReddit];
+        if(self.showInstagramBubble)    [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-instagram" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"instagram" andButtonId:AAShareBubbleTypeInstagram];
+        if(self.showFavoriteBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-star" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"favourite" andButtonId:AAShareBubbleTypeFavorite];
+        if(self.showWhatsappBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-whatsapp" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"whatsApp" andButtonId:AAShareBubbleTypeWhatsapp];
+        if(self.showMessageBubble)      [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-message" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"iMessage" andButtonId:AAShareBubbleTypeMessage];
+        if(self.showQQBubble)           [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-qq" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"qq" andButtonId:AAShareBubbleTypeQQ];
+        if(self.showQzoneBubble)        [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-qzone" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"qzone" andButtonId:AAShareBubbleTypeQzone];
+        if(self.showSinaWeiboBubble)    [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-sinaweibo" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"Sina Weibo" andButtonId:AAShareBubbleTypeSinaWeibo];
+        if(self.showWechatBubble)       [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-wechat" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"WeChat" andButtonId:AAShareBubbleTypeWechat];
+        if(self.showLinkBubble)         [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-link" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"copy link" andButtonId:AAShareBubbleTypeLink];
         
         for (AACustomShareBubble *customBubble in self.customButtons)
         {
@@ -352,6 +353,9 @@
         {
             UIButton *bubble = bubbles[i];
             bubble.tag = i;
+            for (int j=0;j<bubble.subviews.count;j++) {
+                bubble.subviews[j].tag = i;
+            }
             
             float angle = startAngel + i * bubblesBetweenAngel;
             float x = (float) (cos(angle * M_PI / 180) * bubbleDistanceFromPivot + self.radius);
@@ -380,26 +384,7 @@
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             [button addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
             button.frame = CGRectMake(0, 0, 2 * self.bubbleRadius, 2 * self.bubbleRadius);
-            
-            // Circle background
-            UIView *circle = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2 * self.bubbleRadius, 2 * self.bubbleRadius)];
-            circle.backgroundColor = [UIColor clearColor];
-            circle.layer.cornerRadius = self.bubbleRadius;
-            circle.layer.masksToBounds = YES;
-            
-            // Circle icon
-            UIImageView *iconView = [[UIImageView alloc] initWithImage:icon];
-            CGRect f = iconView.frame;
-            f.origin.x = (CGFloat) ((circle.frame.size.width - f.size.width) * 0.5);
-            f.origin.y = (CGFloat) ((circle.frame.size.height - f.size.height) * 0.5);
-            iconView.frame = f;
-            [circle addSubview:iconView];
-            
-            [button setBackgroundImage:[self imageWithView:circle] forState:UIControlStateNormal];
-            
-            bubbleIndexTypes[@(bubbles.count - 1)] = @(AAShareBubbleTypeClose);
-            
-            button.tag = AAShareBubbleTypeClose;
+            [button setBackgroundImage:icon forState:UIControlStateNormal];
             
             button.transform = CGAffineTransformMakeScale(0.001, 0.001);
             button.center = CGPointMake(self.radius, self.radius);
@@ -501,30 +486,20 @@
 
 -(void)createButtonWithIcon:(UIImage*)icon label:(NSString*)label andButtonId:(NSInteger)buttonId {
     UIButton *buttonView = [UIButton buttonWithType:UIButtonTypeCustom];
+    [buttonView setBackgroundColor:[UIColor clearColor]];
     buttonView.frame = CGRectMake(0, 0, 2 * self.bubbleRadius, 3 * self.bubbleRadius);
     [buttonView setClipsToBounds:NO];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:icon forState:UIControlStateNormal];
     [button addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
     button.frame = CGRectMake(0, 0, 2 * self.bubbleRadius, 2 * self.bubbleRadius);
-    // Circle background
-    UIView *circle = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2 * self.bubbleRadius, 2 * self.bubbleRadius)];
-    circle.backgroundColor = [UIColor clearColor];
-    circle.layer.cornerRadius = self.bubbleRadius;
-    circle.layer.masksToBounds = YES;
-    
-    UIImageView *iconView = [[UIImageView alloc] initWithImage:icon];
-    CGRect f = iconView.frame;
-    f.origin.x = (CGFloat) ((circle.frame.size.width - f.size.width) * 0.5);
-    f.origin.y = (CGFloat) ((circle.frame.size.height - f.size.height) * 0.5);
-    iconView.frame = f;
-    [circle addSubview:iconView];
-    
-    [button setBackgroundImage:[self imageWithView:circle] forState:UIControlStateNormal];
+    [buttonView addSubview:button];
     
     [bubbles addObject:buttonView];
     bubbleIndexTypes[@(bubbles.count - 1)] = @(buttonId);
-    UILabel *buttonLabel = [[UILabel alloc]initWithFrame:CGRectMake(-50, 2.2 * self.bubbleRadius, buttonView.frame.size.width + 100, self.bubbleRadius)];
+    
+    UILabel *buttonLabel = [[UILabel alloc]initWithFrame:CGRectMake(-50, 2.0 * self.bubbleRadius, buttonView.frame.size.width + 100, self.bubbleRadius/2)];
     [buttonLabel setTextAlignment:NSTextAlignmentCenter];
     if (self.labelFont != nil) {
         [buttonLabel setFont:self.labelFont];
@@ -532,7 +507,7 @@
     [buttonLabel setTextColor:[UIColor colorWithWhite:0.9 alpha:0.9]];
     [buttonView addSubview:buttonLabel];
     [buttonLabel setText:label];
-    
+    [buttonView addSubview:button];
     [self addSubview:buttonView];
 }
 
