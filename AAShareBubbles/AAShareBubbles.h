@@ -105,7 +105,7 @@ typedef NS_ENUM(NSUInteger, AAShareBubbleType) {
 @property (nonatomic, assign) NSInteger closeBackgroundColorRGB;
 
 -(instancetype)initWithPoint:(CGPoint)point radius:(NSInteger)radiusValue inView:(UIView *)inView;
-
+- (instancetype)initWithPoint:(CGPoint)point radius:(NSInteger)radiusValue inView:(UIView *)inView withFont:(UIFont*)font;
 // Share bubbles will appear in UIWindow instance
 -(instancetype)initCenteredInWindowWithRadius:(NSInteger)radiusValue;
 -(void)showWithLabels;
