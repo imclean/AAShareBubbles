@@ -499,7 +499,7 @@
     [bubbles addObject:buttonView];
     bubbleIndexTypes[@(bubbles.count - 1)] = @(buttonId);
     
-    UILabel *buttonLabel = [[UILabel alloc]initWithFrame:CGRectMake(-50, 2.0 * self.bubbleRadius, buttonView.frame.size.width + 100, self.bubbleRadius/2)];
+    UILabel *buttonLabel = [[UILabel alloc]initWithFrame:CGRectMake(-50, 2.0 * self.bubbleRadius, buttonView.frame.size.width + 100, self.bubbleRadius/2 + 10)];
     [buttonLabel setTextAlignment:NSTextAlignmentCenter];
     if (self.labelFont != nil) {
         [buttonLabel setFont:self.labelFont];
