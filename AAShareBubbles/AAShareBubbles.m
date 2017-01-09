@@ -194,7 +194,7 @@
             UIColor *color = [self colorFromRGB:self.closeBackgroundColorRGB];
             
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            [button addTarget:self action:@selector(hide:) forControlEvents:UIControlEventTouchUpInside];
+            [button addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
             button.frame = CGRectMake(0, 0, 2 * self.bubbleRadius, 2 * self.bubbleRadius);
             
             // Circle background
