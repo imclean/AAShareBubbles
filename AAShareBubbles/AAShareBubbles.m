@@ -504,7 +504,7 @@
     if (self.labelFont != nil) {
         [buttonLabel setFont:self.labelFont];
     }
-    [buttonLabel setTextColor:[UIColor colorWithWhite:0.9 alpha:0.9]];
+    [buttonLabel setTextColor:[UIColor whiteColor]];
     [buttonView addSubview:buttonLabel];
     [buttonLabel setText:label];
     [buttonView addSubview:button];
