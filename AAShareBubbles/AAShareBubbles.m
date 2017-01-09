@@ -37,6 +37,45 @@
     return [self initWithPoint:CGPointMake((CGFloat) (window.frame.size.width * 0.5), (CGFloat) (window.frame.size.height * 0.5)) radius:radiusValue inView:window];
 }
 
+- (instancetype)initWithPoint:(CGPoint)point radius:(NSInteger)radiusValue inView:(UIView *)inView withFont:(UIFont*)font
+{
+    self = [super initWithFrame:CGRectMake(point.x - radiusValue, point.y - radiusValue, 2 * radiusValue, 2 * radiusValue)];
+    if (self) {
+        self.radius = radiusValue;
+        self.bubbleRadius = 40;
+        self.parentView = inView;
+        self.faderAlpha = 0.01;
+        self.faderColor = [UIColor blackColor];
+        self.labelFont = font;
+        self.facebookBackgroundColorRGB = 0x3c5a9a;
+        self.twitterBackgroundColorRGB = 0x3083be;
+        self.mailBackgroundColorRGB = 0xbb54b5;
+        self.googlePlusBackgroundColorRGB = 0xd95433;
+        self.tumblrBackgroundColorRGB = 0x385877;
+        self.vkBackgroundColorRGB = 0x4a74a5;
+        self.linkedInBackgroundColorRGB = 0x008dd2;
+        self.pinterestBackgroundColorRGB = 0xb61d23;
+        self.youtubeBackgroundColorRGB = 0xce3025;
+        self.vimeoBackgroundColorRGB = 0x00acf2;
+        self.redditBackgroundColorRGB = 0xffffff;
+        self.instagramBackgroundColorRGB = 0x2e5e89;
+        self.favoriteBackgroundColorRGB = 0xedd013;
+        self.whatsappBackgroundColorRGB = 0x00B000;
+        self.qqBackgroundColorRGB = 0x1A87DA;
+        self.qzoneBackgroundColorRGB = 0xFFCE04;
+        self.sinaWeiboBackgroundColorRGB = 0xE6162D;
+        self.wechatBackgroundColorRGB = 0x04CE11;
+        self.messageBackgroundColorRGB = 0x55D56A;
+        self.linkBackgroundColorRGB = 0x55D56A;
+        self.closeBackgroundColorRGB = 0x202020;
+        
+        self.customButtons = [[NSMutableArray alloc] init];
+        
+        self.dismissOnBackgroundTap = YES;
+    }
+    return self;
+}
+
 - (instancetype)initWithPoint:(CGPoint)point radius:(NSInteger)radiusValue inView:(UIView *)inView
 {
     self = [super initWithFrame:CGRectMake(point.x - radiusValue, point.y - radiusValue, 2 * radiusValue, 2 * radiusValue)];
@@ -239,6 +278,150 @@
         }
     }
 }
+
+-(void)showWithLabels
+{
+    if(!self.isAnimating)
+    {
+        self.isAnimating = YES;
+        
+        [self.parentView addSubview:self];
+        
+        // Create background
+        faderView = [[UIView alloc] initWithFrame:self.parentView.bounds];
+        faderView.backgroundColor = self.faderColor;
+        faderView.alpha = 0.0f;
+        
+        if (self.dismissOnBackgroundTap) {
+            UITapGestureRecognizer *tapges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareViewBackgroundTapped:)];
+            [faderView addGestureRecognizer:tapges];
+        }
+        
+        [parentView insertSubview:faderView belowSubview:self];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            faderView.alpha = self.faderAlpha;
+        }];
+        // --
+        
+        if(bubbles) {
+            bubbles = nil;
+        }
+        
+        bubbles = [[NSMutableArray alloc] init];
+        bubbleIndexTypes = [[NSMutableDictionary alloc] init];
+        
+        if(self.showFacebookBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-facebook"] label:@"facebook" andButtonId:AAShareBubbleTypeFacebook];
+        if(self.showTwitterBubble)      [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-twitter"] label:@"twitter" andButtonId:AAShareBubbleTypeTwitter];
+        if(self.showGooglePlusBubble)   [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-googleplus"] label:@"google+" andButtonId:AAShareBubbleTypeGooglePlus];
+        if(self.showTumblrBubble)       [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-tumblr"] label:@"tumblr" andButtonId:AAShareBubbleTypeTumblr];
+        if(self.showMailBubble)         [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-at"] label:@"email" andButtonId:AAShareBubbleTypeMail];
+        if(self.showVkBubble)           [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-vk"] label:@"vk" andButtonId:AAShareBubbleTypeVk];
+        if(self.showLinkedInBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-linkedin"] label:@"linkedIn" andButtonId:AAShareBubbleTypeLinkedIn];
+        if(self.showPinterestBubble)    [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-pinterest"] label:@"pinterest" andButtonId:AAShareBubbleTypePinterest];
+        if(self.showYoutubeBubble)      [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-youtube"] label:@"youTube" andButtonId:AAShareBubbleTypeYoutube];
+        if(self.showVimeoBubble)        [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-vimeo"] label:@"vimeo" andButtonId:AAShareBubbleTypeVimeo];
+        if(self.showRedditBubble)       [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-reddit"] label:@"reddit" andButtonId:AAShareBubbleTypeReddit];
+        if(self.showInstagramBubble)    [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-instagram"] label:@"instagram" andButtonId:AAShareBubbleTypeInstagram];
+        if(self.showFavoriteBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-star"] label:@"favourite" andButtonId:AAShareBubbleTypeFavorite];
+        if(self.showWhatsappBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-whatsapp"] label:@"whatsApp" andButtonId:AAShareBubbleTypeWhatsapp];
+        if(self.showMessageBubble)      [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-message"] label:@"iMessage" andButtonId:AAShareBubbleTypeMessage];
+        if(self.showQQBubble)           [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-qq"] label:@"qq" andButtonId:AAShareBubbleTypeQQ];
+        if(self.showQzoneBubble)        [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-qzone"] label:@"qzone" andButtonId:AAShareBubbleTypeQzone];
+        if(self.showSinaWeiboBubble)    [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-sinaweibo"] label:@"Sina Weibo" andButtonId:AAShareBubbleTypeSinaWeibo];
+        if(self.showWechatBubble)       [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-wechat"] label:@"WeChat" andButtonId:AAShareBubbleTypeWechat];
+        if(self.showLinkBubble)         [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-link"] label:@"copy link" andButtonId:AAShareBubbleTypeLink];
+        
+        for (AACustomShareBubble *customBubble in self.customButtons)
+        {
+            [self createButtonWithIcon:customBubble.icon backgroundColor:customBubble.backgroundColor andButtonId:customBubble.customId];
+        }
+        
+        
+        if(bubbles.count == 0) return;
+        
+        float bubbleDistanceFromPivot = self.radius - self.bubbleRadius;
+        
+        float bubblesBetweenAngel = 360 / bubbles.count;
+        float angely = (float) ((180 - bubblesBetweenAngel) * 0.5);
+        float startAngel = 180 - angely;
+        
+        NSMutableArray *coordinates = [NSMutableArray array];
+        
+        for (NSUInteger i = 0; i < bubbles.count; ++i)
+        {
+            UIButton *bubble = bubbles[i];
+            bubble.tag = i;
+            
+            float angle = startAngel + i * bubblesBetweenAngel;
+            float x = (float) (cos(angle * M_PI / 180) * bubbleDistanceFromPivot + self.radius);
+            float y = (float) (sin(angle * M_PI / 180) * bubbleDistanceFromPivot + self.radius);
+            
+            [coordinates addObject:@{@"x" : @(x), @"y" : @(y)}];
+            
+            bubble.transform = CGAffineTransformMakeScale(0.001, 0.001);
+            bubble.center = CGPointMake(self.radius, self.radius);
+        }
+        
+        NSInteger inetratorI = 0;
+        for (NSDictionary *coordinate in coordinates)
+        {
+            UIButton *bubble = bubbles[inetratorI];
+            float delayTime = (float) (inetratorI * 0.1);
+            [self performSelector:@selector(showBubbleWithAnimation:) withObject:@{@"button" : bubble, @"coordinate" : coordinate} afterDelay:delayTime];
+            ++inetratorI;
+        }
+        
+        if(self.showCloseBubble) {
+            NSBundle *classBundle = [NSBundle bundleForClass:[self class]];
+            NSBundle *resourcesBundle = [NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/AAShareBubbles.bundle", classBundle.bundlePath]];
+            UIImage *icon = [UIImage imageNamed:@"icon-aa-close" inBundle:resourcesBundle compatibleWithTraitCollection:nil];
+            
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            [button addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
+            button.frame = CGRectMake(0, 0, 2 * self.bubbleRadius, 2 * self.bubbleRadius);
+            
+            // Circle background
+            UIView *circle = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2 * self.bubbleRadius, 2 * self.bubbleRadius)];
+            circle.backgroundColor = [UIColor clearColor];
+            circle.layer.cornerRadius = self.bubbleRadius;
+            circle.layer.masksToBounds = YES;
+            
+            // Circle icon
+            UIImageView *iconView = [[UIImageView alloc] initWithImage:icon];
+            CGRect f = iconView.frame;
+            f.origin.x = (CGFloat) ((circle.frame.size.width - f.size.width) * 0.5);
+            f.origin.y = (CGFloat) ((circle.frame.size.height - f.size.height) * 0.5);
+            iconView.frame = f;
+            [circle addSubview:iconView];
+            
+            [button setBackgroundImage:[self imageWithView:circle] forState:UIControlStateNormal];
+            
+            bubbleIndexTypes[@(bubbles.count - 1)] = @(AAShareBubbleTypeClose);
+            
+            button.tag = AAShareBubbleTypeClose;
+            
+            button.transform = CGAffineTransformMakeScale(0.001, 0.001);
+            button.center = CGPointMake(self.radius, self.radius);
+            [bubbles addObject:button];
+            [self addSubview:button];
+            [UIView animateWithDuration:0.2 delay:0.1 * bubbles.count options:UIViewAnimationOptionCurveEaseOut animations:^{
+                button.transform = CGAffineTransformMakeScale(1.2, 1.2);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.1 animations:^{
+                    button.transform = CGAffineTransformMakeScale(0.9, 0.9);
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.05 animations:^{
+                        button.transform = CGAffineTransformIdentity;
+                    } completion:^(BOOL finished) {
+                        
+                    }];
+                }];
+            }];
+        }
+    }
+}
+
 -(void)hide
 {
     if(!self.isAnimating)
@@ -316,7 +499,44 @@
     }];
 }
 
--(void)createButtonWithIcon:(UIImage *)icon backgroundColor:(UIColor *)color andButtonId:(NSInteger)buttonId
+-(void)createButtonWithIcon:(UIImage*)icon label:(NSString*)label andButtonId:(NSInteger)buttonId {
+    UIButton *buttonView = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonView.frame = CGRectMake(0, 0, 2 * self.bubbleRadius, 3 * self.bubbleRadius);
+    [buttonView setClipsToBounds:NO];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
+    button.frame = CGRectMake(0, 0, 2 * self.bubbleRadius, 2 * self.bubbleRadius);
+    // Circle background
+    UIView *circle = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2 * self.bubbleRadius, 2 * self.bubbleRadius)];
+    circle.backgroundColor = [UIColor clearColor];
+    circle.layer.cornerRadius = self.bubbleRadius;
+    circle.layer.masksToBounds = YES;
+    
+    UIImageView *iconView = [[UIImageView alloc] initWithImage:icon];
+    CGRect f = iconView.frame;
+    f.origin.x = (CGFloat) ((circle.frame.size.width - f.size.width) * 0.5);
+    f.origin.y = (CGFloat) ((circle.frame.size.height - f.size.height) * 0.5);
+    iconView.frame = f;
+    [circle addSubview:iconView];
+    
+    [button setBackgroundImage:[self imageWithView:circle] forState:UIControlStateNormal];
+    
+    [bubbles addObject:buttonView];
+    bubbleIndexTypes[@(bubbles.count - 1)] = @(buttonId);
+    UILabel *buttonLabel = [[UILabel alloc]initWithFrame:CGRectMake(-50, 2.2 * self.bubbleRadius, buttonView.frame.size.width + 100, self.bubbleRadius)];
+    [buttonLabel setTextAlignment:NSTextAlignmentCenter];
+    if (self.labelFont != nil) {
+        [buttonLabel setFont:self.labelFont];
+    }
+    [buttonLabel setTextColor:[UIColor colorWithWhite:0.9 alpha:0.9]];
+    [buttonView addSubview:buttonLabel];
+    [buttonLabel setText:label];
+    
+    [self addSubview:buttonView];
+}
+
+-(void)createButtonWithIcon:(UIImage*)icon backgroundColor:(UIColor *)color andButtonId:(NSInteger)buttonId
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];

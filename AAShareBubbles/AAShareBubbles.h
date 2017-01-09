@@ -38,7 +38,7 @@ typedef NS_ENUM(NSUInteger, AAShareBubbleType) {
 @interface AAShareBubbles : UIView
 
 @property (nonatomic, assign) id<AAShareBubblesDelegate> delegate;
-
+@property (nonatomic, assign) UIFont *labelFont;
 @property (nonatomic, assign) BOOL showFacebookBubble;
 @property (nonatomic, assign) BOOL showTwitterBubble;
 @property (nonatomic, assign) BOOL showMailBubble;
@@ -108,7 +108,7 @@ typedef NS_ENUM(NSUInteger, AAShareBubbleType) {
 
 // Share bubbles will appear in UIWindow instance
 -(instancetype)initCenteredInWindowWithRadius:(NSInteger)radiusValue;
-
+-(void)showWithLabels;
 -(void)show;
 -(void)hide;
 
