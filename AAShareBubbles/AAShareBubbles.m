@@ -325,13 +325,13 @@
         if(self.showRedditBubble)       [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-reddit" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"reddit" andButtonId:AAShareBubbleTypeReddit];
         if(self.showInstagramBubble)    [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-instagram" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"instagram" andButtonId:AAShareBubbleTypeInstagram];
         if(self.showFavoriteBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-star" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"favourite" andButtonId:AAShareBubbleTypeFavorite];
-        if(self.showWhatsappBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-whatsapp" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"whatsApp" andButtonId:AAShareBubbleTypeWhatsapp];
-        if(self.showMessageBubble)      [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-message" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"iMessage" andButtonId:AAShareBubbleTypeMessage];
+        if(self.showWhatsappBubble)     [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-whatsapp" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"whatsapp" andButtonId:AAShareBubbleTypeWhatsapp];
+        if(self.showMessageBubble)      [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-message" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"sms" andButtonId:AAShareBubbleTypeMessage];
         if(self.showQQBubble)           [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-qq" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"qq" andButtonId:AAShareBubbleTypeQQ];
         if(self.showQzoneBubble)        [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-qzone" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"qzone" andButtonId:AAShareBubbleTypeQzone];
         if(self.showSinaWeiboBubble)    [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-sinaweibo" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"Sina Weibo" andButtonId:AAShareBubbleTypeSinaWeibo];
         if(self.showWechatBubble)       [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-wechat" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"WeChat" andButtonId:AAShareBubbleTypeWechat];
-        if(self.showLinkBubble)         [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-link" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"copy link" andButtonId:AAShareBubbleTypeLink];
+        if(self.showLinkBubble)         [self createButtonWithIcon:[UIImage imageNamed:@"icon-aa-link" inBundle:resourcesBundle compatibleWithTraitCollection:nil] label:@"copy url" andButtonId:AAShareBubbleTypeLink];
         
         for (AACustomShareBubble *customBubble in self.customButtons)
         {
